@@ -91,3 +91,16 @@ def update_person(id):
         db.session.commit()
         return jsonify({"success": True, "response": "Person Details updated", "Person": request.json})
 
+#http://127.0.0.1:5000/persons/1
+@cross_origin()  
+@app.route("/persons/<int:id>", methods = ["DELETE"])
+def delete_persons(id):
+    person = Person.query.get(id)
+
+    if person is None:
+        abort(404)
+    else:
+        db.session.delete(person)
+        db.session.commit()
+        return jsonify({"success": True, "response": "Person deleted successfully"})
+
