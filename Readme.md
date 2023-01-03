@@ -84,7 +84,7 @@
                 "total": 4
             }
 
-3. PATCH - > Update person 
+3. PATCH - > Update person .
 - endpoint -> http://127.0.0.1:5000/persons/6
 - body ->
 
