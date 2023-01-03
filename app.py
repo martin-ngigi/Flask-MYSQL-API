@@ -71,3 +71,23 @@ def get_persons():
             "total": len(persons)
         }
     )
+
+#http://127.0.0.1:5000/persons/1
+@cross_origin()  
+@app.route("/persons/<int:id>", methods = ["PATCH"])
+def update_person(id):
+    person = Person.query.get(id)
+    name = request.json['name']
+    age = request.json['age']
+    city = request.json['city']
+
+    if person is None:
+        abort(404)
+    else:
+        person.name = name
+        person.age = age
+        person.city = city
+        db.session.add(person)
+        db.session.commit()
+        return jsonify({"success": True, "response": "Person Details updated", "Person": request.json})
+
